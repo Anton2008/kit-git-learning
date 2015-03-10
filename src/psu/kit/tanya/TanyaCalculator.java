@@ -34,7 +34,7 @@ public class TanyaCalculator {
                 }
             }
         }
-        reactor=new TanyaReaction(yay,whoops);
+        TanyaReaction reactor=new TanyaReaction(yay,whoops);
         return reactor;
     }
 }

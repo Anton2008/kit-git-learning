@@ -1,7 +1,5 @@
 package psu.kit.tanya;
 
-import java.util.Scanner;
-
 public class TanyaCalculator {
 
 

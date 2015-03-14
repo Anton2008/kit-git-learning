@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class TanyaCalculatorTest {
     private TanyaCalculator calc;
@@ -36,7 +36,7 @@ public class TanyaCalculatorTest {
         };
     }
 
-    private char ch(int number) {
+    private char getCharByIndex(int number) {
         if (number < 26) {
             return (char) (number + 'a');
         } else {
@@ -50,8 +50,8 @@ public class TanyaCalculatorTest {
         StringBuilder strS = new StringBuilder();
         StringBuilder strT = new StringBuilder();
         for (int i = 0; i < 2 * Math.pow(10, 5); ++i) {
-            strS.append(ch(rnd.nextInt(52)));
-            strT.append(ch(rnd.nextInt(52)));
+            strS.append(getCharByIndex(rnd.nextInt(52)));
+            strT.append(getCharByIndex(rnd.nextInt(52)));
         }
         testCalculate(strS.toString(), strT.toString(), 198101, 491);
     }

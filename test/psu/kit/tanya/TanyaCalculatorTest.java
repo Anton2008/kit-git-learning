@@ -36,35 +36,6 @@ public class TanyaCalculatorTest {
         };
     }
 
-    @Test(dataProvider = "Tanya")
-    public void testCalculate(String s, String t, int yayCount, int whoopsCount) throws Exception {
-        TanyaReaction result = calc.calculate(s, t);
-        assertEquals(result.getWhoopsCount(), whoopsCount);
-        assertEquals(result.getYayCount(), yayCount);
-    }
-
-    @Test
-    public void testTanya_randomArray() throws Exception {
-        int seed = 11;
-        int yayCount = 0;
-        int whoopsCount = 0;
-        Random rnd = new Random(seed);
-        StringBuilder strS = new StringBuilder();
-        StringBuilder strT = new StringBuilder();
-        for (int i = 0; i < 2 * Math.pow(10, 5); ++i) {
-            strS.append(ch(rnd.nextInt(52)));
-            strT.append(ch(rnd.nextInt(52)));
-            if ((Character.isUpperCase(strS.charAt(i)) == Character.isUpperCase(strT.charAt(i))) || (Character.isLowerCase(strS.charAt(i))) == Character.isLowerCase(strT.charAt(i))) {
-                ++yayCount;
-            } else {
-                if (Character.toLowerCase(strS.charAt(i)) == strT.charAt(i) || Character.toUpperCase(strS.charAt(i)) == strT.charAt(i)) {
-                    ++whoopsCount;
-                }
-            }
-        }
-        testCalculate(strS.toString(), strT.toString(), yayCount, whoopsCount);
-    }
-
     private char ch(int number) {
         if (number < 26) {
             return (char) (number + 'a');
@@ -72,4 +43,25 @@ public class TanyaCalculatorTest {
             return (char) (number + 'A' - 26);
         }
     }
+
+    @Test(timeOut = 2000)
+    public void testTanya_randomArray() throws Exception {
+        Random rnd = new Random(11);
+        StringBuilder strS = new StringBuilder();
+        StringBuilder strT = new StringBuilder();
+        for (int i = 0; i < 2 * Math.pow(10, 5); ++i) {
+            strS.append(ch(rnd.nextInt(52)));
+            strT.append(ch(rnd.nextInt(52)));
+        }
+        testCalculate(strS.toString(), strT.toString(), 198101, 491);
+    }
+
+    @Test(dataProvider = "Tanya")
+    public void testCalculate(String s, String t, int yayCount, int whoopsCount) throws Exception {
+        TanyaReaction result = calc.calculate(s, t);
+        assertEquals(result.getWhoopsCount(), whoopsCount);
+        assertEquals(result.getYayCount(), yayCount);
+    }
+
+
 }

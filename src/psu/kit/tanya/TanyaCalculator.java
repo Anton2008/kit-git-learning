@@ -18,9 +18,8 @@ public class TanyaCalculator {
 
         Map<Character, Integer> map = new Hashtable<Character, Integer>();
 
-
         while (i < lenT) {
-            map.put(tCopy[i], map.getOrDefault(tCopy[i],0) + 1);
+            map.put(tCopy[i], map.getOrDefault(tCopy[i], 0) + 1);
             ++i;
         }
         i = 0;

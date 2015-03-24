@@ -4,40 +4,45 @@ public class TanyaCalculator {
 
     public TanyaReaction calculate(String s, String t) {
 
-        int[] bigChar = new int[30];
-        int[] smallChar = new int[30];
+
         int yayCount = 0;
         int whoopsCount = 0;
-
+        int[] bigChar = new int[30];
+        int[] smallChar = new int[30];
+        //   int[] ds= new int[30];
 
         for (int i = 0; i < t.length(); ++i) {
-            char tchar = t.charAt(i);   //charAt- îáðàùåíèå ê ñèìâîëó ñòðîêè
+            char tchar = t.charAt(i);   //charAt- Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ðº ÑÐ¸Ð¼Ð²Ð¾Ð»Ñƒ ÑÑ‚Ñ€Ð¾ÐºÐ¸
 
-            if (Character.isUpperCase(tchar)) {    //ïðîâåðÿåò, çàïèñàí ëè ñèìâîë â âåðõíåì ðåãèñòðå
-                bigChar[tchar - 'A']++;
-            }
-            if (Character.isLowerCase(tchar)) {    //îïðåäåëÿåò, çàïèñàí ëè ñèìâîë â íèæíåì ðåãèñòðå;
+
+            if (Character.isLowerCase(tchar)) {    //Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚, Ð·Ð°Ð¿Ð¸ÑÐ°Ð½ Ð»Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð» Ð² Ð½Ð¸Ð¶Ð½ÐµÐ¼ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ðµ;
                 smallChar[tchar - 'a']++;
+            }
+
+            if (Character.isUpperCase(tchar)) {    //Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÑ‚, Ð·Ð°Ð¿Ð¸ÑÐ°Ð½ Ð»Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð» Ð² Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ðµ
+                bigChar[tchar - 'A']++;
             }
         }
 
-        StringBuilder sb = new StringBuilder(s);     //ñîçäàñò string builder äëèíîé 9 ñèìâîëîâ è åìêîñòüþ 16:
+        StringBuilder strbild = new StringBuilder(s);     //ÑÐ¾Ð·Ð´Ð°ÑÑ‚ string builder Ð´Ð»Ð¸Ð½Ð¾Ð¹ 9 ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð¸ ÐµÐ¼ÐºÐ¾ÑÑ‚ÑŒÑŽ 16:
 
         for (int i = 0; i < s.length(); i++) {
             char schar = s.charAt(i);
-            if (Character.isUpperCase(schar) && bigChar[schar - 'A'] > 0) {
-                bigChar[schar - 'A']--;
-                yayCount++;
-                sb.setCharAt(i, '\0');
-            }
+
             if (Character.isLowerCase(schar) && smallChar[schar - 'a'] > 0) {
                 smallChar[schar - 'a']--;
                 yayCount++;
-                sb.setCharAt(i, '\0');
+                strbild.setCharAt(i, '\0');
+            }
+
+            if (Character.isUpperCase(schar) && bigChar[schar - 'A'] > 0) {
+                bigChar[schar - 'A']--;
+                yayCount++;
+                strbild.setCharAt(i, '\0');
             }
         }
 
-        s = sb.toString();
+        s = strbild.toString();
 
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
@@ -51,8 +56,7 @@ public class TanyaCalculator {
             if (Character.isUpperCase(ch) && bigChar[ch - 'A'] > 0) {
                 bigChar[ch - 'A']--;
                 whoopsCount++;
-            }
-            if (Character.isLowerCase(ch) && smallChar[ch - 'a'] > 0) {
+            } else if (Character.isLowerCase(ch) && smallChar[ch - 'a'] > 0) {
                 smallChar[ch - 'a']--;
                 whoopsCount++;
             }

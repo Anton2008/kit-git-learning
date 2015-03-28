@@ -2,36 +2,37 @@ package psu.kit.tanya;
 
 public class TanyaCalculator {
 
+    public int magicConst = 26;
     public TanyaReaction calculate(String s, String t) {
 
         int whoopsCount = 0;
         int yayCount = 0;
 
-        int[] countT = new int[52];
-        int[] countS = new int[52];
+        int[] countT = new int[magicConst * 2];
+        int[] countS = new int[magicConst * 2];
 
         countLetters(countS, s);
         countLetters(countT, t);
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < magicConst; i++) {
             while (countS[i] > 0 && countT[i] > 0) {
                 yayCount++;
                 countS[i]--;
                 countT[i]--;
             }
-            while (countS[i + 26] > 0 && countT[i + 26] > 0) {
+            while (countS[i + magicConst] > 0 && countT[i + magicConst] > 0) {
                 yayCount++;
-                countS[i + 26]--;
-                countT[i + 26]--;
+                countS[i + magicConst]--;
+                countT[i + magicConst]--;
             }
-            while (countS[i] > 0 && countT[i + 26] > 0) {
+            while (countS[i] > 0 && countT[i + magicConst] > 0) {
                 whoopsCount++;
                 countS[i]--;
-                countT[i + 26]--;
+                countT[i + magicConst]--;
             }
-            while (countS[i + 26] > 0 && countT[i] > 0) {
+            while (countS[i + magicConst] > 0 && countT[i] > 0) {
                 whoopsCount++;
-                countS[i + 26]--;
+                countS[i + magicConst]--;
                 countT[i]--;
             }
         }
@@ -43,12 +44,12 @@ public class TanyaCalculator {
         if (Character.isUpperCase(c)) {
             return c - 'A';
         } else {
-            return c - 'a' + 26;
+            return c - 'a' + magicConst;
         }
     }
 
-    private void countLetters(int[] a, String s){
-        for (int i = 0; i < s.length(); i++){
+    private void countLetters(int[] a, String s) {
+        for (int i = 0; i < s.length(); i++) {
             a[convertLetterToIndex(s.charAt(i))]++;
         }
     }

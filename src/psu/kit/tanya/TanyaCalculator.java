@@ -22,24 +22,15 @@ public class TanyaCalculator {
                 //S=S.substring(0,i)+S.substring(i+1);
                 //i--;
             } else {
-                tmp += S.charAt(i);
+                tmp += (Character.isUpperCase(S.charAt(i)))? Character.toLowerCase(S.charAt(i)):Character.toUpperCase(S.charAt(i));
             }
         }
         S = tmp;
         for (int i = 0; i < S.length(); i++) {
-            if (Character.isUpperCase(S.charAt(i))) {
-                Character character = Character.toLowerCase(S.charAt(i));
-                if (T[character%60] > 0) {
+                if (T[S.charAt(i)%60] > 0) {
                     whoops++;
-                    T[character%60]--;
+                    T[S.charAt(i)%60]--;
                 }
-            } else {
-                Character character = Character.toUpperCase(S.charAt(i));
-                if (T[character%60] > 0) {
-                    whoops++;
-                    T[character%60]--;
-                }
-            }
         }
         return new TanyaReaction(yay, whoops);
     }

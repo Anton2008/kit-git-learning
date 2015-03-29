@@ -4,32 +4,30 @@ public class TanyaCalculator {
 
     public TanyaReaction calculate(String s, String t) {
         int yay = 0, whoops = 0;
-        int[] T = new int[60];
-        String S = s, tmp = "";
+        int[] tArray = new int[60];
+        String str = s, tmp = "";
 
-        for (int i = 0; i < T.length; i++) {
-            T[i] = 0;
+        for (int i = 0; i < tArray.length; i++) {
+            tArray[i] = 0;
         }
 
         for (int i = 0; i < t.length(); i++) {
-            T[t.charAt(i) % 60]++;
+            tArray[t.charAt(i)-'A']++;
         }
 
-       for (int i = 0; i < S.length(); i++) {
-            if (T[S.charAt(i)%60] > 0) {
+       for (int i = 0; i < str.length(); i++) {
+            if (tArray[str.charAt(i) - 'A'] > 0) {
                 yay++;
-                T[S.charAt(i)%60]--;
-                //S=S.substring(0,i)+S.substring(i+1);
-                //i--;
+                tArray[str.charAt(i) - 'A']--;
             } else {
-                tmp += (Character.isUpperCase(S.charAt(i)))? Character.toLowerCase(S.charAt(i)):Character.toUpperCase(S.charAt(i));
+                tmp += (Character.isUpperCase(str.charAt(i)))? Character.toLowerCase(str.charAt(i)):Character.toUpperCase(str.charAt(i));
             }
         }
-        S = tmp;
-        for (int i = 0; i < S.length(); i++) {
-                if (T[S.charAt(i)%60] > 0) {
+        str = tmp;
+        for (int i = 0; i < str.length(); i++) {
+                if (tArray[str.charAt(i) - 'A'] > 0) {
                     whoops++;
-                    T[S.charAt(i)%60]--;
+                    tArray[str.charAt(i) - 'A']--;
                 }
         }
         return new TanyaReaction(yay, whoops);
